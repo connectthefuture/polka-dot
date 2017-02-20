@@ -4,18 +4,18 @@
 
 # Full license text available at https://shreyas.mit-license.org
 
-POLKA_VERSION = "0.1.0"
-POLKA_ARGUMENT = "$1"
+let POLKA_VERSION = "0.1.0"
+let POLKA_ARGUMENT = "$1"
 
 relative_path() {
-  TRIMMED = eval sed "s/$1/''/g" $2
+  let TRIMMED = eval sed "s/$1/''/g" $2
   return TRIMMED
 }
 
 symlink_files() {
-  ALL_FILES = find "$POLKA_DIR"
+  let ALL_FILES = find "$POLKA_DIR"
   for file in ALL_FILES do
-    CURRENT_FILE = relative_path $POLKA_DIR $file
+    let CURRENT_FILE = relative_path $POLKA_DIR $file
     grep $CURRENT_FILE .polkaignore
 
     # if the file is not in .polkaignore
@@ -55,7 +55,7 @@ link() {
   echo "The following symlinks will be made:"
 
   for file in POLKA_DIR do
-    CURRENT_FILE = relative_path $POLKA_DIR $file
+    let CURRENT_FILE = relative_path $POLKA_DIR $file
     grep $CURRENT_FILE .polkaignore
 
     # if the file is not in .polkaignore
@@ -78,10 +78,10 @@ version() {
 }
 
 docs() {
-  echo "Polka is licensed under the MIT License(See README on github.com/shreyasminocha/polka-dot)\n\n"
-  echo "USAGE: polka [COMMAND]\n"
-  echo "`polka link`: Links all dotfiles in the current directory to the home folder mimicking the file tree present in the dotfile directory\n"
-  echo "`polka version`: Prints out the version of the polka dot script you are using.\n"
+  echo "Polka is licensed under the MIT License(See README on github.com/shreyasminocha/polka-dot)"
+  echo "USAGE: polka [COMMAND]"
+  echo "`polka link`: Links all dotfiles in the current directory to the home folder mimicking the file tree present in the dotfile directory"
+  echo "`polka version`: Prints out the version of the polka dot script you are using."
   echo "`polka help`: Prints usage and copyright information."
 }
 
