@@ -5,15 +5,15 @@
 # Full license text available at https://shreyas.mit-license.org
 
 POLKA_VERSION = "0.1.0"
-POLKA_ARGUMENT = $1
+POLKA_ARGUMENT = "$1"
 
 relative_path() {
-  TRIMMED = eval(sed 's/$1/""/g' $2)
+  TRIMMED = eval(sed "s/$1/''/g" $2)
   return TRIMMED
 }
 
 symlink_files() {
-  ALL_FILES = find "POLKA_DIR"
+  ALL_FILES = find "$POLKA_DIR"
   for file in ALL_FILES do
     CURRENT_FILE = relative_path $POLKA_DIR $file
     grep $CURRENT_FILE .polkaignore
@@ -49,15 +49,13 @@ symlink_files() {
     rm -rf "~/dotfiles.old"
     mv "dotfiles.old.archive" "dotfiles.old"
   fi
-
-  exit 0
 }
 
 link() {
   echo "The following symlinks will be made:"
 
   for file in POLKA_DIR do
-    CURRENT_FILE = sed 's/$POLKA_DIR/""/g' $file
+    CURRENT_FILE = relative_path $POLKA_DIR $file
     grep $CURRENT_FILE .polkaignore
 
     # if the file is not in .polkaignore
