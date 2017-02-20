@@ -8,7 +8,7 @@ POLKA_VERSION = "0.1.0"
 POLKA_ARGUMENT = "$1"
 
 relative_path() {
-  TRIMMED = eval(sed "s/$1/''/g" $2)
+  TRIMMED = eval sed "s/$1/''/g" $2
   return TRIMMED
 }
 
